@@ -140,7 +140,7 @@ export class HomePage {
 
   reidectToAnimeFlv() {
     setTimeout(() => {
-      window.open('https://github.com/Freynelbp', '_blank');
+      window.open('https://www3.animeflv.net/anime/naruto-shippuden-road-to-ninja', '_blank');
     }, 500)
     
   }

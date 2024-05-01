@@ -1,0 +1,7 @@
+{
+  "name": "Api-Naruto",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

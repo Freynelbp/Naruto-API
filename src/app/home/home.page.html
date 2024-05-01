@@ -1,0 +1,207 @@
+
+
+<ion-menu side="end" contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title style="display: flex; justify-content: center; align-items: center; background-color: black;">
+        <img id="logoMenu" src="assets/images/logoAldeaHoja.svg" alt="">
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding">
+    <ion-list lines="none">
+      <ion-item button routerLink="/home" routerDirection="forward" lines="none" style="padding: 10px;">
+        <ion-label><ion-icon name="home-outline"></ion-icon> Home</ion-label>
+      </ion-item>
+      <ion-item button routerLink="/privacy" routerDirection="forward" lines="none" style="padding: 10px;" (click)="reidectToAnimeFlv()">
+        <ion-label><ion-icon name="videocam-outline"></ion-icon> Ver Anime</ion-label>
+      </ion-item>
+      <ion-item button lines="none" style="padding: 10px;" (click)="redirectToGitHub()">
+        <ion-label>
+          <ion-icon name="logo-github" slot="start"></ion-icon> Contacto
+        </ion-label>
+      </ion-item>
+      
+      
+    </ion-list>
+  </ion-content>
+
+  <footer style="background-color: rgb(18, 18, 18); color: #fff; text-align: center; padding: 10px;">
+    <p>&copy; 2024 Programacion - SRL <br><span style="font-size: 15px;"> Todos los derechos reservados.</span></p>
+  </footer>
+</ion-menu>
+
+
+
+
+
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title><a href="#"><img id="logoNaruto" src="assets/images/logoNaruto.png" alt=""></a></ion-title>
+      <ion-buttons slot="end">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+
+
+  
+  <ion-content mode="ios" style="--ion-background-color: url(assets/images/narutoRunningBack.gif);
+  --color: white;">
+
+    <div class="glass-content">
+      <ion-grid>
+
+        <ion-row>
+          <ion-col class="d-flex-center" size="12">
+            <ion-searchbar placeholder="Buscar..." [(ngModel)]="parametroNombre" (ionInput)="SearchByName()" [debounce]="250"></ion-searchbar>
+          </ion-col>
+        </ion-row>
+
+
+
+        <ion-row>
+          <ion-col size-lg="6" size-md="6" size-sm="12" size="12" *ngFor="let item of Listado, let i = index">
+            <ion-card (click)="setOpen(true, i)">
+              <ion-grid>
+                <ion-row>
+                  <ion-col class="ion-padding"size-lg="4" size-md="4" size-sm="4" size="12">
+                    <ion-avatar>
+                      <img alt="{{item.name}}" src="{{item.images[0]}}" style="max-height: 170px;"/>
+                    </ion-avatar>
+                  </ion-col>
+                  <ion-col class="ion-padding" size-lg="8" size-md="8" size-sm="8" size="12">
+                    <div class="name"><label style="font-size: 40px; color: rgb(255, 166, 0);">{{item.name}}</label></div>
+                    <p><label style="font-size: 22px; color: rgb(0, 34, 255);  font-weight: bold;"> Aparicion:</label>  <strong style="font-size: 18px;"> {{ValidarDebut(item.debut) == true ? (ValidarDebut2(item) == true ? item.debut.appearsIn : item.debut.anime) : 'Desconocido'}}</strong></p>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    
+
+
+
+      <ion-modal [isOpen]="isModalOpen">
+        
+        <ng-template>
+          <ion-header>
+            <ion-toolbar>
+              <ion-title>Detalles</ion-title>
+              <ion-buttons slot="end">
+                <ion-button (click)="setOpen(false)">Cerrar</ion-button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-header>
+
+
+
+          <ion-content style="--ion-background-color: url(assets/images/gif{{gif}}.gif);
+          --color: white;">
+            <div class="glass-content ion-padding">
+              <ion-avatar>
+                <!--<img alt="Silhouette of mountains" src="{{PersonajeInfo.images[0]}}" />-->
+                <img id="imagenModal" alt="Silhouette of mountains" src="assets/images/gif{{gif}}.gif" />
+              </ion-avatar>
+            
+              <div>
+                <p style="text-align: center;"> <label style="font-size: 50px; color: rgb(255, 68, 0); font-weight: bold;">{{PersonajeInfo.name}}</label></p>
+                
+                <strong style="font-size: 30px; color: rgb(255, 157, 0);">Jutsus:</strong> 
+                  <ul>
+                    <li *ngFor="let item0 of PersonajeInfo.jutsu">{{ValidarJutsu(PersonajeInfo.jutsu) == true ? item0 : 'Desconocido'}}</li>
+                  </ul> 
+                  
+                
+                <p><strong style="font-size: 30px; color: rgb(255, 157, 0);">Aparicion:</strong><label> {{ValidarDebut(PersonajeInfo.debut) == true ? (ValidarDebut2(PersonajeInfo) == true ? PersonajeInfo.debut.appearsIn : PersonajeInfo.debut.anime) : 'Desconocido'}}</label></p>
+                <p><strong style="font-size: 30px; color: rgb(255, 157, 0);">Episodio:</strong> <label> {{ValidarDebut(PersonajeInfo.debut) == true ? (ValidarDebut(PersonajeInfo.debut.anime) == true ? PersonajeInfo.debut.anime : 'Desconocido') : 'Desconocido'}}</label></p>
+                <p><strong style="font-size: 30px; color: rgb(255, 157, 0);">Clan:</strong> <label> {{ValidarDebut(PersonajeInfo.personal) == true ? (ValidarDebut(PersonajeInfo.personal.clan) == true ? PersonajeInfo.personal.clan : 'Desconocido') : 'Desconocido'}}</label></p>
+              </div>
+
+          </div>
+          </ion-content>
+          
+
+        </ng-template>
+      
+      </ion-modal>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!--      
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title style="font-size: 4ch;">Personajes</ion-card-title>
+        <ion-card-subtitle>Naruto Shippuden</ion-card-subtitle>
+        
+      </ion-card-header>
+      <ion-card-content>
+
+        <ion-list>
+          <ion-item *ngFor="let item of Listado, let i = index">
+            <ion-thumbnail slot="start">
+              <img alt="{{item.name}}" src="{{item.images[0]}}" (click)="setOpen(true, i)"/>
+            </ion-thumbnail>
+            <ion-label (click)="setOpen(true, i)">{{item.name}}</ion-label>
+
+            <ion-modal [isOpen]="isModalOpen">
+              <ng-template>
+                <ion-header>
+                  <ion-toolbar>
+                    <ion-title>Informacion</ion-title>
+                    <ion-buttons slot="end">
+                      <ion-button (click)="setOpen(false)">Cerrar</ion-button>
+                    </ion-buttons>
+                  </ion-toolbar>
+                </ion-header>
+
+
+
+                <ion-content class="ion-padding">
+                  <ion-card>
+
+                    <img alt="Silhouette of mountains" src="{{PersonajeInfo.images[0]}}" />
+                    <ion-card-header>
+                      <ion-card-title>{{PersonajeInfo.name}}</ion-card-title>
+                      <ion-card-subtitle>{{PersonajeInfo.debut.anime}}</ion-card-subtitle>
+                    </ion-card-header>
+
+                    <ion-card-content>
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Error, vel dolores culpa laudantium, perspiciatis voluptatum vitae minima sequi quia saepe quae fugiat unde harum asperiores iure aliquam! Minima, accusamus cumque!S
+                    </ion-card-content>
+
+                  </ion-card>
+                </ion-content>
+
+
+              </ng-template>
+            </ion-modal>
+
+          </ion-item>
+        </ion-list>
+
+      </ion-card-content>
+    </ion-card>
+    -->
+  </div>
+  </ion-content>
+  
+</div>

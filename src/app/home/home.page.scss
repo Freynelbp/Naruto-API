@@ -1,0 +1,73 @@
+#container {
+  text-align: center;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#container strong {
+  font-size: 20px;
+  line-height: 26px;
+}
+
+#container p {
+  font-size: 16px;
+  line-height: 22px;
+
+  color: #8c8c8c;
+
+  margin: 0;
+}
+
+#container a {
+  text-decoration: none;
+}
+
+
+
+ion-header {
+  display: flex;
+  justify-content: space-between; /* Esto separará las imágenes */
+  align-items: left; /* Centra verticalmente las imágenes */
+}
+
+#logoMenu {
+  width: 70px; /* Ajusta el tamaño según tus necesidades */
+  height: auto;
+}
+
+#logoNaruto{
+  width: 150px; /* Ajusta el tamaño según tus necesidades */
+  height: auto;
+}
+
+
+ion-avatar{
+  --border-radius:10px;
+  width: 100%;
+  height: 100%;
+}
+
+.name{
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+ion-searchbar{
+  --backgroun: rgba(7,7,7,0.2);
+  max-width: 350px;
+  color: white;
+}
+
+#imagenModal{
+  min-height: 350px;
+  max-height: 400px;
+}
+a {
+  text-decoration: none; /* Quitar subrayado */
+  color: inherit; /* Heredar color de texto */
+  cursor: pointer; /* Cambiar cursor a pointer */
+}
